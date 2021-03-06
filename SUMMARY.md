@@ -16,6 +16,13 @@
 * [Inject Values Using Hints](object-mapping/inject-values-using-hints.md)
 * [Mapping to a bean](object-mapping/mapping-to-a-bean.md)
 
+## JTX
+
+* [JTX overview](jtx/jtx-overview.md)
+* [JTX Concepts](jtx/jtx-concepts.md)
+* [Example](jtx/example.md)
+* [Db and Annotations](jtx/db-and-annotations.md)
+
 ## Misc
 
 * [DB Relations Example](misc/db-relations-example.md)
