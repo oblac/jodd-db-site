@@ -1,6 +1,6 @@
 # Db
 
-_DbOom_ provides an efficient, powerful and thin layer over JDBC that significantly simplifies writing of database code. Using pure JDBC api correctly requires writing the same code snippets over and over again, what easily leads to unmaintainable application. Often there are run-time problems just because of incorrect database handling. _DbOom_ introduces several smart façades that helps in writing smaller, cleaner and maintainable code.
+**DbOom** provides an efficient, powerful and thin layer over JDBC that significantly simplifies writing of database code. Using pure JDBC api correctly requires writing the same code snippets over and over again, what easily leads to unmaintainable application. Often there are run-time problems just because of incorrect database handling. _DbOom_ introduces several smart façades that helps in writing smaller, cleaner and maintainable code.
 
 Moreover, _DbOom_ is the mapper between object and relational world using plain SQL queries. It defines object-table mappings using annotations or naming convention. However, relationships are not pre-defined, they are set on very place where used. The best way how to think of _DbOom_ is from the JDBC perspective: it is not a full-blown complex ORM library; instead, it is just a nice tool built over _Db_ for efficient database mapping.
 
