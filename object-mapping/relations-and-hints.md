@@ -4,7 +4,7 @@ We have already seen how to use _hints_ to inject values into resulting objects.
 
 ### Problem
 
-Here is the real-life problem. Lets say that we have a list of some telecommunication centers in database. Each center has one or more associated prefixes. Also, each center belongs to one country \(i.e. region\). We need to fetch all telecom data, as they do not change during the application runtime.
+Here is the real-life problem. Lets say that we have a list of some telecommunication centers in database. Each center has one or more associated prefixes. Also, each center belongs to one country (i.e. region). We need to fetch all telecom data, as they do not change during the application runtime.
 
 ### Model
 
@@ -114,7 +114,7 @@ While this perfectly works with **one-to-one** relationships, like with `Country
 
 ### Cache entities
 
-Fortunately, the problem is easy to solve: by enabling caching on query level \(i.e. on result-set level\). So this code:
+Fortunately, the problem is easy to solve: by enabling caching on query level (i.e. on result-set level). So this code:
 
 ```java
     DbOomQuery q = query(sql(
@@ -130,7 +130,7 @@ _DbOoom_ now caches **all entities** during the execution of a query and re-uses
 
 Using query cache increases memory usage. {: .attn}
 
-There is just one thing to be aware of - the resulting list will still contain duplicated records \(hey, it's the same with Hibernate:\) The trivial way to fix this is to use a `Set` instead of `List`\:
+There is just one thing to be aware of - the resulting list will still contain duplicated records (hey, it's the same with Hibernate:) The trivial way to fix this is to use a `Set` instead of `List`\\:
 
 ```java
     DbOomQuery q = query(sql(
@@ -160,5 +160,4 @@ In entity aware mode, not only that objects are cached, but also they are compar
     telecoms = q.list(Telecom.class, TelecomPrefix.class, Country.class);
 ```
 
-will now return `List` **without** the duplicates! Just a nice object tree, ready to be used :\)
-
+will now return `List` **without** the duplicates! Just a nice object tree, ready to be used :)

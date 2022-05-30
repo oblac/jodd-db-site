@@ -49,7 +49,7 @@ To understand the concepts of _JTX_ its best to see an example. To make things s
         }
 ```
 
-Now we are ready to begin our journey:\)
+Now we are ready to begin our journey:)
 
 ### ResourceManager
 
@@ -90,11 +90,11 @@ Since we will use `JtxTransactionManager`, propagation behavior and timeout will
     }
 ```
 
-Quick overview of what we have done in `beginTransaction()`\: the `active` flag tells us if real transaction should be started or we are working in auto-commit mode. When it is set, we create a transaction-aware resource. Since isolation is ignored, we only need to pass read-only flag.
+Quick overview of what we have done in `beginTransaction()`\\: the `active` flag tells us if real transaction should be started or we are working in auto-commit mode. When it is set, we create a transaction-aware resource. Since isolation is ignored, we only need to pass read-only flag.
 
 ### Usage
 
-Now we are ready to use _JTX_\:
+Now we are ready to use _JTX_\\:
 
 ```java
     // [1] create jtx manager and register our resource manager
@@ -118,9 +118,8 @@ Now we are ready to use _JTX_\:
     manager.close();
 ```
 
-The most important thing to remember is that in step \#2 we are just **requesting** a jtx transaction. Not until the next step, \#3, the real transaction will be started. Again, we are **requesting** a resource, therefore, if we call it several time in a row, the same resource instance will be returned.
+The most important thing to remember is that in step #2 we are just **requesting** a jtx transaction. Not until the next step, #3, the real transaction will be started. Again, we are **requesting** a resource, therefore, if we call it several time in a row, the same resource instance will be returned.
 
 ### Worker
 
-_JTX_ also provides `LeanJtxWorker`, a class that utilizes `JtxTransactionManager` and makes it more convenient for use when transaction is requested over different context, i.e. with transaction nesting. Basically, everything stays the same, except `LeanJtxWorker` would return `null` when new transaction is not created on its request, meaning that current transaction matches the requested transaction attributes \(mostly propagation\).
-
+_JTX_ also provides `LeanJtxWorker`, a class that utilizes `JtxTransactionManager` and makes it more convenient for use when transaction is requested over different context, i.e. with transaction nesting. Basically, everything stays the same, except `LeanJtxWorker` would return `null` when new transaction is not created on its request, meaning that current transaction matches the requested transaction attributes (mostly propagation).

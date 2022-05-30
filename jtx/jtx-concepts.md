@@ -4,11 +4,11 @@ _JTX_ is all about: resources, resource managers, transactions and transaction m
 
 ### Resources and Resource managers
 
-Resource in _JTX_ is anything that have transactions. Speaking programatically, resource is any class than encapsulates some transactional entity, for example: database session \(for databases\), messages manager \(for message queues\). Resource knows how to **maintain** a transaction.
+Resource in _JTX_ is anything that have transactions. Speaking programatically, resource is any class than encapsulates some transactional entity, for example: database session (for databases), messages manager (for message queues). Resource knows how to **maintain** a transaction.
 
-Each resource \(i.e. resource type\) has its own resource manager. In _JTX_, resource manager is responsible for managing transactions of the resources of the same type. As seen in the code, `JtxResourceManager` interface is fairly simple, two most important methods are `beginTransaction()` and `rollbackTransaction()`.
+Each resource (i.e. resource type) has its own resource manager. In _JTX_, resource manager is responsible for managing transactions of the resources of the same type. As seen in the code, `JtxResourceManager` interface is fairly simple, two most important methods are `beginTransaction()` and `rollbackTransaction()`.
 
-We can say that `JtxResourceManager` serves as an **adapter** between _JTX_ framework and some transactional resource. For e.g. database that would be an implementation that takes database session \(or connection\) and creates a new transaction on it. Since it is an adapter, beginning and rolling back the transactions can be now done through resource manager, without touching the resource itself.
+We can say that `JtxResourceManager` serves as an **adapter** between _JTX_ framework and some transactional resource. For e.g. database that would be an implementation that takes database session (or connection) and creates a new transaction on it. Since it is an adapter, beginning and rolling back the transactions can be now done through resource manager, without touching the resource itself.
 
 ### Transaction manager
 
@@ -16,13 +16,13 @@ Transaction manager goes one step further. It's purpose is to control all regist
 
 As said, _JTX_ transaction manager is used to start transactions. Actually, when needed transactions are **requested** from the _JTX_ manager. Depending on transaction **propagation**, manager will return an existing transaction or a new one.
 
-Requested transactions may be optionally scoped by context in which they exists. Only one transaction may be opened in the context. For example, context can be a class within the transactions are created, so only the first method of that class will create the transaction; if that method internally invoke other \(transactional\) methods, their requests will be ignored.
+Requested transactions may be optionally scoped by context in which they exists. Only one transaction may be opened in the context. For example, context can be a class within the transactions are created, so only the first method of that class will create the transaction; if that method internally invoke other (transactional) methods, their requests will be ignored.
 
 ### Transaction
 
-Transaction is an unit of work that is performed by one or more resources. Great definition, huh:\)? In _JTX_, transactions are encapsulated by `JtxTransaction` class. The most important thing to remember about it is that:
+Transaction is an unit of work that is performed by one or more resources. Great definition, huh:)? In _JTX_, transactions are encapsulated by `JtxTransaction` class. The most important thing to remember about it is that:
 
-`JtxTransaction` is a '**transactional request**'. Its existence doesn't mean that real transaction is started on the resources\(s\). {: .attn}
+`JtxTransaction` is a '**transactional request**'. Its existence doesn't mean that real transaction is started on the resources(s). {: .attn}
 
 We said that `JtxTransactions` are **requested** from the `JtxTransactionManager`. But only when a **resource** is requested from the jtx transaction, a real transaction is started on the resource!
 
@@ -62,29 +62,23 @@ Read-only transaction does not modify any data. Transaction should fail on write
 
 One very important feature provided by `JtxTransactionManager` is propagation behavior management. This means that manager will handle transaction propagation as defined by transaction mode attribute.
 
-Following propagations are supported by _JTX_\:
+Following propagations are supported by _JTX_\\:
 
-* `PROPAGATION_REQUIRED` - Support a current transaction, create a new
+*   `PROPAGATION_REQUIRED` - Support a current transaction, create a new
 
-  one if none exists;
+    one if none exists;
+*   `PROPAGATION_SUPPORTS` - Support a current transaction, execute
 
-* `PROPAGATION_SUPPORTS` - Support a current transaction, execute
+    non-transactionally if none exists;
+*   `PROPAGATION_MANDATORY` - Support a current transaction, throw an
 
-  non-transactionally if none exists;
+    exception if none exists;
+*   `PROPAGATION_REQUIRES_NEW` - Create a new transaction, suspend the
 
-* `PROPAGATION_MANDATORY` - Support a current transaction, throw an
+    current transaction if one exists;
+*   `PROPAGATION_NOT_SUPPORTED` - Execute non-transactionally, suspend the
 
-  exception if none exists;
+    current transaction if one exists;
+*   `PROPAGATION_NEVER` - Execute non-transactionally, throw an exception
 
-* `PROPAGATION_REQUIRES_NEW` - Create a new transaction, suspend the
-
-  current transaction if one exists;
-
-* `PROPAGATION_NOT_SUPPORTED` - Execute non-transactionally, suspend the
-
-  current transaction if one exists;
-
-* `PROPAGATION_NEVER` - Execute non-transactionally, throw an exception
-
-  if a transaction exists.
-
+    if a transaction exists.
